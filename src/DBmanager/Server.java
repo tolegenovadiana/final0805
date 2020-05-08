@@ -8,15 +8,15 @@ public class Server {
     public static Connection connection;
     public static void main(String[] args) {
         try{
-            ServerSocket ss = new ServerSocket(8899);
+            ServerSocket ss = new ServerSocket(3306);
 
             while(true){
-                System.out.println("waiting for client");
+                System.out.println("waiting");
                 Socket socket = ss.accept();
-                System.out.println("new client connected");
+                System.out.println("connected");
 
-                Client sth = new Client(socket,connection);
-                sth.start();
+                Client client = new Client(socket,connection);
+                client.start();
             }
         }
         catch(Exception e){
