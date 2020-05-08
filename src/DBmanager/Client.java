@@ -3,9 +3,9 @@ import java.io.*;
 import java.net.*;
 import java.sql.*;
 
-public class Client extends Thread {
-    private Connection connection;
-    private Socket socket;
+public class Client {
+    private final Connection connection;
+    private final Socket socket;
     ObjectInputStream input;
     ObjectOutputStream output;
 
