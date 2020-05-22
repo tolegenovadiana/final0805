@@ -1,7 +1,5 @@
 package DBmanager;
-
 import com.sun.source.tree.WhileLoopTree;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -37,14 +35,14 @@ public class BasketGUI extends JFrame {
         datelabel.setBackground(Color.RED);
         datelabel.setForeground(Color.WHITE);
 
-        price.setBounds(300,270,100,20);
+        price.setBounds(300,270,200,20);
         add(price);
         price.setOpaque(true);
         price.setBackground(Color.RED);
         price.setForeground(Color.WHITE);
 
 
-        label.setBounds(300,240,100,20);
+        label.setBounds(300,240,200,20);
         add(label);
         label.setOpaque(true);
         label.setBackground(Color.RED);

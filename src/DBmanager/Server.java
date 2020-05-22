@@ -1,27 +1,42 @@
 package DBmanager;
 
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
 
 public class Server {
-    public static Connection connection;
+
+    private static Socket clientSocket;
+    private static ServerSocket server;
+    private static BufferedReader in;
+    private static BufferedWriter out;
+
     public static void main(String[] args) {
-        try{
-            ServerSocket ss = new ServerSocket(3306);
+        try {
+            try {
+                server = new ServerSocket(8809);
+                System.out.println("Server is turned on!");
+                clientSocket = server.accept();
+                try {
+                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
-            while(true){
-                System.out.println("waiting");
-                Socket socket = ss.accept();
-                System.out.println("connected");
+                    String word = in.readLine();
+                    System.out.println(word);
+                    out.write("Hello, this is Server! Confirm, you wrote: " + word + "\n");
+                    out.flush();
 
-                Client client = new Client(socket,connection);
-                client.start();
+                } finally {
+                    clientSocket.close();
+                    in.close();
+                    out.close();
+                }
+            } finally {
+                System.out.println("Thank you, Server is turned off!");
+                server.close();
             }
-        }
-        catch(Exception e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println(e);
         }
     }
-
 }

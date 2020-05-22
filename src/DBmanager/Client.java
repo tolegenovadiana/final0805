@@ -1,22 +1,38 @@
 package DBmanager;
 import java.io.*;
-import java.net.*;
-import java.sql.*;
+import java.net.Socket;
 
 public class Client {
-    private final Connection connection;
-    private final Socket socket;
-    ObjectInputStream input;
-    ObjectOutputStream output;
 
-    public Client(Socket socket, Connection connection) {
-        this.socket = socket;
-        this.connection = connection;
+    private static Socket clientSocket;
+    private static BufferedReader reader;
+    private static BufferedReader in;
+    private static BufferedWriter out;
+
+    public static void main(String[] args) {
         try {
-            input = new ObjectInputStream(this.socket.getInputStream());
-            output = new ObjectOutputStream(this.socket.getOutputStream());
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            try {
+                clientSocket = new Socket("localhost", 8809);
+                reader = new BufferedReader(new InputStreamReader(System.in));
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+
+                System.out.println("Would you like to say something? Please, write it here:");
+                String word = reader.readLine();
+                out.write(word + "\n");
+                out.flush();
+                String serverWord = in.readLine();
+                System.out.println(serverWord);
+            }
+            finally {
+                System.out.println("Client was closed.. ");
+                clientSocket.close();
+                in.close();
+                out.close();
+            }
+        } catch (IOException e) {
+            System.err.println(e);
         }
+
     }
 }

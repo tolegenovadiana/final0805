@@ -78,7 +78,6 @@ public class RegistrationGUI extends JFrame {
                         Database database = new Database();
                         database.newuser(login, password, name, role);
                         helloLabel.setText("You registered successfully");
-
                     }
                     else {
                         helloLabel.setText(" Try again");
@@ -92,7 +91,6 @@ public class RegistrationGUI extends JFrame {
             }
         });
         add(buttonreg);
-
 
         im.setBounds(0,0,500,330);
         add(im);

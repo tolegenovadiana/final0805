@@ -17,7 +17,7 @@ public class UserGUI extends JFrame {
     JButton back=new JButton("Back");
     public UserGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100,100,400,200);
+        setBounds(150,100,415,200);
         setLayout(null);
         setTitle("UserGUI");
 
@@ -36,23 +36,14 @@ public class UserGUI extends JFrame {
                     setVisible(false);
                 } catch (ClassNotFoundException classNotFoundException) {
                     classNotFoundException.printStackTrace();
-                } catch (SQLException throwables) {
+                } catch (SQLException | IOException throwables) {
                     throwables.printStackTrace();
                 }
 
             }
         });
         add(add);
-        back.setBounds(280, 60, 70, 30);
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LoginGUI loginGUI=new LoginGUI();
-                loginGUI.setVisible(true);
-                setVisible(false);
-            }
-        });
-        add(back);
+
         basket.setBounds(155, 60, 100, 30);
         basket.addActionListener(new ActionListener() {
         @Override
@@ -63,6 +54,17 @@ public class UserGUI extends JFrame {
         }
     });
     add(basket);
+        back.setBounds(285, 60, 70, 30);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginGUI loginGUI=new LoginGUI();
+                loginGUI.setVisible(true);
+                setVisible(false);
+            }
+        });
+        add(back);
+
         im.setBounds(0,0,400,200);
         add(im);
         ImageIcon image = new ImageIcon("C:\\Users\\Диана\\untitled3\\src\\com\\company\\4.jpg");

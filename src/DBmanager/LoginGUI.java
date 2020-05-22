@@ -18,11 +18,9 @@ public class LoginGUI extends JFrame {
     JButton buttonreg = new JButton("Registration");
     JLabel im = new JLabel("");
 
-
-
     public LoginGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 410, 270);
+        setBounds(100, 100, 405, 270);
         setLayout(null);
         setTitle("LoginGUI");
         helloLabel.setBounds(150, 20, 180, 20);
@@ -51,8 +49,6 @@ public class LoginGUI extends JFrame {
         textFieldpassword.setBounds(200, 80, 150, 20);
         add(textFieldpassword);
 
-
-
         buttonreg.setBounds(200, 170, 150, 30);
         buttonreg.addActionListener(new ActionListener() {
             @Override
@@ -72,17 +68,26 @@ public class LoginGUI extends JFrame {
         buttonlogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String login = textFieldlogin.getText();
-                String password = textFieldpassword.getText();
+                String login=textFieldlogin.getText();
+                String password=textFieldpassword.getText();
                 try {
-                    Database database = new Database();
-                    if (database.login(login, password) == 1) {
+                    Database database=new Database();
+                    if(login.compareTo("Admin")==0 && database.login(login,password)==1){
 
                         helloLabel.setText("You are logged in");
-                        UserGUI userGUI = new UserGUI();
+                        AdminGUI adminGUI=new AdminGUI();
+                        adminGUI.setVisible(true);
+                        setVisible(false);
+                    }
+                    else if( database.login(login,password)==1){
+
+                        helloLabel.setText("You are logged in");
+                        UserGUI userGUI=new UserGUI();
                         userGUI.setVisible(true);
                         setVisible(false);
-                    } else {
+                    }
+
+                    else{
                         helloLabel.setText("You are not logged in");
                     }
                 } catch (ClassNotFoundException e) {
@@ -94,7 +99,7 @@ public class LoginGUI extends JFrame {
             }
         });
         add(buttonlogin);
-        im.setBounds(0,0,400,250);
+        im.setBounds(-10,0,400,250);
         add(im);
         ImageIcon image = new ImageIcon("C:\\Users\\Диана\\untitled3\\src\\com\\company\\3.png");
         im.setIcon(image);
